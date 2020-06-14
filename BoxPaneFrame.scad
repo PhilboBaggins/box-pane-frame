@@ -32,16 +32,19 @@ module BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing)
     BoxPaneFrameSide2D(size[2], size[1], panelThickness, cornerSpacing);
 }
 
-module BoxPaneFramePane2D(sizeX, sizeY, cornerSpacing, boxThickness)
+module BoxPaneFramePane2D(
+    size = DEFAULT_SIZE,
+    cornerSpacing = DEFAULT_CORNER_SPACING,
+    boxThickness = DEFAULT_BOX_THICKNESS)
 {
     posX1 = 0;
-    posX2 = sizeX - cornerSpacing - boxThickness;
+    posX2 = size[0] - cornerSpacing - boxThickness;
     posY1 = 0;
-    posY2 = sizeY - cornerSpacing;
+    posY2 = size[1] - cornerSpacing;
 
     difference()
     {
-        square([sizeX, sizeY]);
+        square([size[0], size[1]]);
 
         translate([posX1, posY1]) square([cornerSpacing + boxThickness, cornerSpacing]);
         translate([posX1, posY2]) square([cornerSpacing + boxThickness, cornerSpacing]);
@@ -117,5 +120,5 @@ module BoxPaneFrame3D(
     PanelColour()
     translate([0, 0, (size[2] - panelThickness) / 2])
     linear_extrude(panelThickness)
-    BoxPaneFramePane2D(size[0], size[1], cornerSpacing, boxThickness);
+    BoxPaneFramePane2D(size, cornerSpacing, boxThickness);
 }
