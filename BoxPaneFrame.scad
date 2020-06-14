@@ -50,37 +50,45 @@ module BoxPaneFramePane2D(sizeX, sizeY, cornerSpacing, boxThickness)
     }
 }
 
-module BoxPaneFrame2D(
+module BoxPaneFrameJustFrame2D(
     size = DEFAULT_SIZE,
     panelThickness = DEFAULT_PANE_THICKNESS,
     cornerSpacing = DEFAULT_CORNER_SPACING,
     boxThickness = DEFAULT_BOX_THICKNESS)
 {
     buffer = 0.25;
-    posX1 = 0;
+
+    posX1 = buffer;
     posX2 = posX1 + size[2] + buffer;
     posX3 = posX2 + size[2] + buffer;
     posX4 = posX3 + size[2] + buffer;
-    posX5 = posX4 + size[2] + buffer;
 
     BoxColour()
+    {
     translate([posX1, 0])
     BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing, boxThickness);
 
-    BoxColour()
     translate([posX2, 0])
     BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing, boxThickness);
 
-    BoxColour()
     translate([posX3, 0])
     BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
 
-    BoxColour()
     translate([posX4, 0])
     BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
+    }
+}
+
+module BoxPaneFrame2D(
+    size = DEFAULT_SIZE,
+    panelThickness = DEFAULT_PANE_THICKNESS,
+    cornerSpacing = DEFAULT_CORNER_SPACING,
+    boxThickness = DEFAULT_BOX_THICKNESS)
+{
+    BoxPaneFrameJustFrame2D(size, panelThickness, cornerSpacing, boxThickness);
 
     PanelColour()
-    translate([posX5, 0])
+    translate([-size[0], 0])
     BoxPaneFramePane2D(size[0], size[1], cornerSpacing, boxThickness);
 }
 
