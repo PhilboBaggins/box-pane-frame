@@ -53,7 +53,7 @@ module BoxPaneFramePane2D(
     }
 }
 
-module BoxPaneFrameJustFrame2D(
+module BoxPaneFrameBox2D(
     size = DEFAULT_SIZE,
     panelThickness = DEFAULT_PANE_THICKNESS,
     cornerSpacing = DEFAULT_CORNER_SPACING,
@@ -81,7 +81,7 @@ module BoxPaneFrame2D(
     cornerSpacing = DEFAULT_CORNER_SPACING,
     boxThickness = DEFAULT_BOX_THICKNESS)
 {
-    BoxPaneFrameJustFrame2D(size, panelThickness, cornerSpacing, boxThickness);
+    BoxPaneFrameBox2D(size, panelThickness, cornerSpacing, boxThickness);
 
     PanelColour()
     translate([-size[0], 0])
