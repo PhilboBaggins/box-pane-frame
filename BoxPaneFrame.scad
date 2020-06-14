@@ -62,7 +62,7 @@ module BoxPaneFrameBox2D(
     buffer = 0.25;
 
     posX1 = buffer;
-    posX2 = buffer + size[2];
+    posX2 = buffer * 2 + size[2];
     posY1 = 0;
     posY2 = buffer + size[0] - boxThickness * 2;
 
