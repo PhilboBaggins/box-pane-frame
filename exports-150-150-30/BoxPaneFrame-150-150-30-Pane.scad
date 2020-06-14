@@ -1,0 +1,8 @@
+use <../BoxPaneFrame.scad>
+
+SIZE = [150, 150, 50];
+PANE_THICKNESS = 3;
+CORNER_SPACING = 6;
+BOX_THICKNESS = 10;
+
+BoxPaneFramePane2D(SIZE, CORNER_SPACING, BOX_THICKNESS);
