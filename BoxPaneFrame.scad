@@ -59,23 +59,16 @@ module BoxPaneFrameJustFrame2D(
     buffer = 0.25;
 
     posX1 = buffer;
-    posX2 = posX1 + size[2] + buffer;
-    posX3 = posX2 + size[2] + buffer;
-    posX4 = posX3 + size[2] + buffer;
+    posX2 = buffer + size[2];
+    posY1 = 0;
+    posY2 = buffer + size[0] - boxThickness * 2;
 
     BoxColour()
     {
-    translate([posX1, 0])
-    BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing, boxThickness);
-
-    translate([posX2, 0])
-    BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing, boxThickness);
-
-    translate([posX3, 0])
-    BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
-
-    translate([posX4, 0])
-    BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
+        translate([posX1, posY1]) BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing, boxThickness);
+        translate([posX2, posY1]) BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing, boxThickness);
+        translate([posX1, posY2]) BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
+        translate([posX2, posY2]) BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
     }
 }
 
