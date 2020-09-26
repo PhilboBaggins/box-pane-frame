@@ -9,5 +9,4 @@ I think I'll use these materials:
 * Box: 6 mm [Macrocarpa Hardwood](https://www.ponoko.com/materials/macrocarpa-hardwood)
 * Pane: 2 sheets of 1.5 mm [Clear PETG](https://www.ponoko.com/materials/clear-petg)
 
-
 ![exports/BoxPaneFrame-Assembly.png](exports/BoxPaneFrame-Assembly.png)
