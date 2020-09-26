@@ -3,8 +3,8 @@
 <svg width="150mm" height="150mm" viewBox="0 -150 150 150" xmlns="http://www.w3.org/2000/svg" version="1.1">
 <title>OpenSCAD Model</title>
 <path d="
-M 134,-144 L 134,-150 L 16,-150 L 16,-144 L 0,-144 L 0,-6
- L 16,-6 L 16,-0 L 134,-0 L 134,-6 L 150,-6 L 150,-144
+M 144,-144 L 144,-150 L 6,-150 L 6,-144 L 0,-144 L 0,-6
+ L 6,-6 L 6,-0 L 144,-0 L 144,-6 L 150,-6 L 150,-144
  z
 " stroke="black" fill="lightgray" stroke-width="0.5"/>
 </svg>

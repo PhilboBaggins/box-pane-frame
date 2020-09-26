@@ -2,7 +2,7 @@
 DEFAULT_SIZE = [150, 200, 30];
 DEFAULT_PANE_THICKNESS = 3;
 DEFAULT_BOX_THICKNESS = 6;
-DEFAULT_CORNER_SPACING = 10;
+DEFAULT_CORNER_SPACING = DEFAULT_BOX_THICKNESS;
 
 BOX_COLOUR = "Brown";
 PANEL_COLOUR = "grey";
@@ -11,25 +11,36 @@ PANEL_ALPHA = 0.25;
 module BoxColour() { color(BOX_COLOUR) children(); }
 module PanelColour() { color(PANEL_COLOUR, PANEL_ALPHA) children(); }
 
-module BoxPaneFrameSide2D(sizeX, sizeY, slotThickness, cornerSpacing)
+module BoxPaneFrameSide2D(sizeX, sizeY, slotThickness, cornerSpacing, joinerCutPositions)
 {
+    joinerCutDivisions = 6;
+    joinerCutThickness = sizeX / joinerCutDivisions;
+
     difference()
     {
+        // Overall shape
         square([sizeX, sizeY]);
 
+        // Slot for panel
         translate([(sizeX - slotThickness) / 2, cornerSpacing])
         square([slotThickness, sizeY - cornerSpacing * 2]);
+
+        // Cutouts to help join this box side with the other sides
+        translate([joinerCutThickness * joinerCutPositions[0], 0]) square([joinerCutThickness, joinerCutThickness]);
+        translate([joinerCutThickness * joinerCutPositions[1], 0]) square([joinerCutThickness, joinerCutThickness]);
+        translate([joinerCutThickness * joinerCutPositions[0], sizeY - joinerCutThickness]) square([joinerCutThickness, joinerCutThickness]);
+        translate([joinerCutThickness * joinerCutPositions[1], sizeY - joinerCutThickness]) square([joinerCutThickness, joinerCutThickness]);
     }
 }
 
-module BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing, boxThickness)
+module BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing)
 {
-    BoxPaneFrameSide2D(size[2], size[0] - boxThickness * 2, panelThickness, cornerSpacing);
+    BoxPaneFrameSide2D(size[2], size[0], panelThickness, cornerSpacing, [0, 5]);
 }
 
 module BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing)
 {
-    BoxPaneFrameSide2D(size[2], size[1], panelThickness, cornerSpacing);
+    BoxPaneFrameSide2D(size[2], size[1], panelThickness, cornerSpacing, [1, 4]);
 }
 
 module BoxPaneFramePane2D(
@@ -38,7 +49,7 @@ module BoxPaneFramePane2D(
     boxThickness = DEFAULT_BOX_THICKNESS)
 {
     posX1 = 0;
-    posX2 = size[0] - cornerSpacing - boxThickness;
+    posX2 = size[0] - cornerSpacing;
     posY1 = 0;
     posY2 = size[1] - cornerSpacing;
 
@@ -46,10 +57,10 @@ module BoxPaneFramePane2D(
     {
         square([size[0], size[1]]);
 
-        translate([posX1, posY1]) square([cornerSpacing + boxThickness, cornerSpacing]);
-        translate([posX1, posY2]) square([cornerSpacing + boxThickness, cornerSpacing]);
-        translate([posX2, posY1]) square([cornerSpacing + boxThickness, cornerSpacing]);
-        translate([posX2, posY2]) square([cornerSpacing + boxThickness, cornerSpacing]);
+        translate([posX1, posY1]) square([cornerSpacing, cornerSpacing]);
+        translate([posX1, posY2]) square([cornerSpacing, cornerSpacing]);
+        translate([posX2, posY1]) square([cornerSpacing, cornerSpacing]);
+        translate([posX2, posY2]) square([cornerSpacing, cornerSpacing]);
     }
 }
 
@@ -68,8 +79,8 @@ module BoxPaneFrameBox2D(
 
     BoxColour()
     {
-        translate([posX1, posY1]) BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing, boxThickness);
-        translate([posX2, posY1]) BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing, boxThickness);
+        translate([posX1, posY1]) BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
+        translate([posX2, posY1]) BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
         translate([posX1, posY2]) BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
         translate([posX2, posY2]) BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
     }
@@ -96,15 +107,15 @@ module BoxPaneFrame3D(
 {
     BoxColour()
     {
-        translate([boxThickness, 0, 0])
+        translate([0, 0, 0])
         rotate([0, 270, 270])
         linear_extrude(boxThickness)
-        BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing, boxThickness);
+        BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
 
-        translate([boxThickness, size[1] - boxThickness, 0])
+        translate([0, size[1] - boxThickness, 0])
         rotate([0, 270, 270])
         linear_extrude(boxThickness)
-        BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing, boxThickness);
+        BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
 
         translate([boxThickness, 0, 0])
         rotate([0, 270, 0])
