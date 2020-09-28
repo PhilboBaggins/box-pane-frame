@@ -81,11 +81,11 @@ module BoxPaneFrameBox2D(
     posY1 = 0;
     posY2 = buffer + size[0] - boxThickness * 2;
 
-        translate([posX1, posY1]) BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
-        translate([posX2, posY1]) BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
-        translate([posX1, posY2]) BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
-        translate([posX2, posY2]) BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
-    }
+    translate([posX1, posY1]) BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
+    translate([posX2, posY1]) BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
+    translate([posX1, posY2]) BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
+    translate([posX2, posY2]) BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
+}
 
 module BoxPaneFrame2D(
     size = DEFAULT_SIZE,
@@ -107,28 +107,28 @@ module BoxPaneFrame3D(
     boxThickness = DEFAULT_BOX_THICKNESS)
 {
     BoxColourX()
-        translate([0, 0, 0])
-        rotate([0, 270, 270])
-        linear_extrude(boxThickness)
-        BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
+    translate([0, 0, 0])
+    rotate([0, 270, 270])
+    linear_extrude(boxThickness)
+    BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
 
     BoxColourX()
-        translate([0, size[1] - boxThickness, 0])
-        rotate([0, 270, 270])
-        linear_extrude(boxThickness)
-        BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
+    translate([0, size[1] - boxThickness, 0])
+    rotate([0, 270, 270])
+    linear_extrude(boxThickness)
+    BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
 
     BoxColourY()
-        translate([boxThickness, 0, 0])
-        rotate([0, 270, 0])
-        linear_extrude(boxThickness)
-        BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
+    translate([boxThickness, 0, 0])
+    rotate([0, 270, 0])
+    linear_extrude(boxThickness)
+    BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
 
     BoxColourY()
-        translate([size[0], 0, 0])
-        rotate([0, 270, 0])
-        linear_extrude(boxThickness)
-        BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
+    translate([size[0], 0, 0])
+    rotate([0, 270, 0])
+    linear_extrude(boxThickness)
+    BoxPaneFrameSideY2D(size, panelThickness, cornerSpacing);
 
     PanelColour()
     translate([0, 0, (size[2] - panelThickness) / 2])
