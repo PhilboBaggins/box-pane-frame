@@ -74,12 +74,12 @@ module BoxPaneFrameBox2D(
     cornerSpacing = DEFAULT_CORNER_SPACING,
     boxThickness = DEFAULT_BOX_THICKNESS)
 {
-    buffer = 0.25;
+    buffer = 1;
 
     posX1 = buffer;
     posX2 = buffer * 2 + size[2];
     posY1 = 0;
-    posY2 = buffer + size[0] - boxThickness * 2;
+    posY2 = buffer + size[0];
 
     translate([posX1, posY1]) BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
     translate([posX2, posY1]) BoxPaneFrameSideX2D(size, panelThickness, cornerSpacing);
